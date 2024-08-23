@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD in JAVASCRIPT</title>
+</head>
+<body>
+     <section>
+        <div class="box">
+            <div class="val">
+                <h4>Insert Data</h4>
+                   <input type="text" placeholder="Enter your Name" id="" name="">
+                   <input type="text" placeholder="Enter your Email" id="" name="">
+                   <input type="text" placeholder="Enter your Contact" id="" name="">
+                   <input type="submit" onclick="getData()" value="submit" id="" name="">
+                   
+            </div>
+            <div class="val">
+                <h4>Update Data</h4>
+                <input type="text" placeholder="Enter your Name" id="" name="">
+                <input type="text" placeholder="Enter your Email" id="" name="">
+                <input type="text" placeholder="Enter your Contact" id="" name="">
+                <input type="hidden" placeholder="" id="" name="">
+                <input type="submit" onclick="dataUpdate()" value="update">
+                
+         </div>
+        </div>
+        <div>
+            <table border="1" width="100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Contact</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     
+                </tbody>
+            </table>
+        </div>
+     </section>
+
+     <script>
+        var arrOfObject=[
+            {name:"Harry", email:"harryn@gmail.com", contact:"1234567890"}
+        ]
+        console.log(arrOfObject);
+
+        function getData() {
+            var _name = document.getElementsByTagName('input')[0].value
+            var _email = document.getElementsByTagName('input')[1].value
+            var _contact =document.getElementsByTagName('input')[2].value
+
+            
+            var obj={name : _name, email : _email, contact : _contact}
+            console.log(obj);
+
+
+            arrOfObject.push(obj)
+            showData();
+
+            document.getElementsByTagName('input')[0].value=""
+            document.getElementsByTagName('input')[1].value=""
+            document.getElementsByTagName('input')[2].value=""
+        }
+
+        function showData(){
+            var _tbody = document.getElementsByTagName('tbody')[0]
+            _tbody.innerHTML=""
+
+            for(var i=0; i<arrOfObject.length; i++){
+            _tbody.innerHTML += `
+            
+               <tr>
+                    <td>${i}</td>
+                    <td>${arrOfObject[i].name}</td>
+                     <td>${arrOfObject[i].email}</td>
+                    <td>${arrOfObject[i].contact}</td>
+                    <td>
+                        
+                        <button onClick="_del(${i})">DELETE</button>
+                        <button onClick="_update(${i})">UPDATE</button>
+
+                    </td>
+                
+               </tr>
+            
+            `    
+            }
+        }
+        function _del(i){
+            arrOfObject.splice(i, 1)
+            
+            showData();
+        }
+
+        function _update(i){
+
+            document.getElementsByTagName('input')[4].value=arrOfObject[i].name
+            document.getElementsByTagName('input')[5].value=arrOfObject[i].email
+            document.getElementsByTagName('input')[6].value=arrOfObject[i].contact
+            document.getElementsByTagName('input')[7].value= i
+        }
+        function dataUpdate(){
+            var _name = document.getElementsByTagName('input')[4].value
+            var _contact = document.getElementsByTagName('input')[5].value
+            var _email = document.getElementsByTagName('input')[6].value
+            var _ind = document.getElementsByTagName('input')[7].value
+
+            var obj = { Name: _name, Contact: _contact, Email: _email }
+            TechRel.splice(_ind,1,obj)
+
+            showData()
+        }
+     </script>
+</body>
+</html>
+
+
+
